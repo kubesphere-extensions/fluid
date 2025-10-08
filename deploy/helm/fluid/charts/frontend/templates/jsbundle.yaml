@@ -7,9 +7,9 @@ metadata:
     {{- include "frontend.labels" . | nindent 4 }}
 spec:
   rawFrom:
-    url: https://raw.githubusercontent.com/zmrlft/fluid-ks-extension/refs/heads/main/deploy/frontend-dist/index.js
-# status:
-#   link: /dist/fluid-ext/index.js
-#   state: Available
+    configMapKeyRef:
+      key: index.js
+      name: fluid-ui
+      namespace: {{ .Release.Namespace }}
 {{- end }}
 

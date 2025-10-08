@@ -23,7 +23,22 @@ spec:
       containers:
         - name: fluid-crds-upgrade
           image: {{ include "fluid.controlplane.imageTransform" (list .Values.crdUpgrade.imagePrefix .Values.crdUpgrade.imageName .Values.crdUpgrade.imageTag . ) }}
-          command: ["bash", "/fluid/upgrade-crds.sh"]
+          command:
+            - bash
+            - -c
+            - |
+              set -e
+
+              echo "🚀 Running CRD upgrade..."
+              chmod +x /fluid/upgrade-crds.sh
+              /fluid/upgrade-crds.sh
+
+              echo "✅ CRD upgrade succeeded. Now labeling CRDs ending with data.fluid.io ..."
+              for crd in $(kubectl get crd -o name | grep 'data\.fluid\.io$'); do
+                kubectl label $crd kubesphere.io/resource-served='true' --overwrite
+              done
+
+              echo "🎉 All matching CRDs labeled successfully."
       restartPolicy: OnFailure
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -37,7 +52,7 @@ metadata:
 rules:
   - apiGroups: ["apiextensions.k8s.io"]
     resources: ["customresourcedefinitions"]
-    verbs: ["create", "get", "update"]
+    verbs: ["create", "get", "update", "list", "patch"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding

@@ -34,10 +34,10 @@ screenshots:
 dependencies:
   - name: frontend
     tags:
-    - extension
+      - extension
   - name: fluid
     tags:
-    - agent
+      - agent
 # installationMode describes how to install subcharts, it can be HostOnly or Multicluster.
 # In Multicluster mode, the subchart with tag `extension` will only be deployed to the host cluster,
 # and the subchart with tag `agent` will be deployed to all selected clusters.
@@ -61,3 +61,10 @@ installationMode: Multicluster
 #  executor-hook-image.kubesphere.io/install: ...
 #  executor-hook-image.kubesphere.io/upgrade: ...
 #  executor-hook-image.kubesphere.io/uninstall: ...
+images:
+  - docker.io/fluidcloudnative/application-controller:v1.0.5-7e917c7
+  - docker.io/fluidcloudnative/csi-node-driver-registrar:v2.3.0
+  - docker.io/fluidcloudnative/dataset-controller:v1.0.5-7e917c7
+  - docker.io/fluidcloudnative/fluid-crd-upgrader:v1.0.5-7e917c7
+  - docker.io/fluidcloudnative/fluid-csi:v1.0.5-7e917c7
+  - docker.io/fluidcloudnative/fluid-webhook:v1.0.5-7e917c7

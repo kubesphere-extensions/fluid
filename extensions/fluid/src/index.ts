@@ -3,7 +3,7 @@ import locales from './locales';
 
 const menus = [
   {
-    parent: 'topbar',
+    parent: 'global',
     name: 'fluid',
     title: 'fluid',
     icon: 'cluster',

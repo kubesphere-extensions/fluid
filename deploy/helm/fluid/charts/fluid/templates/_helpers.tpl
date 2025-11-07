@@ -69,6 +69,10 @@ Create the name of the service account to use
   {{- $imageTag := index . 2 -}}
   {{- $root := index . 3 -}}
 
+  {{- if $root.Values.global.imageRegistry -}}
+    {{- $imagePrefix = $root.Values.global.imageRegistry -}}
+  {{- end -}}
+
   {{- /* If any value is empty, return an error message */ -}}
   {{- if or (empty $imagePrefix) (empty $imageName) (empty $imageTag) -}}
     {{- fail "Error: imagePrefix, imageName, and imageTag must all be defined and non-empty." -}}
@@ -83,6 +87,10 @@ Create the name of the service account to use
   {{- $imageName := index . 1 -}}
   {{- $imageTag := index . 2 -}}
   {{- $root := index . 3 -}}
+
+  {{- if $root.Values.global.imageRegistry -}}
+    {{- $imagePrefix = $root.Values.global.imageRegistry -}}
+  {{- end -}}
 
   {{- /* If any value is empty, return an error message */ -}}
   {{- if or (empty $imagePrefix) (empty $imageName) (empty $imageTag) -}}
@@ -161,3 +169,11 @@ Check if feature gate DataflowAffinity is enabled in the featureGates.
 {{- end -}}
 {{- $found -}}
 {{- end -}}
+
+{{- define "common.nodeSelectors" -}}
+{{- $selector := default .Values.global.nodeSelector .Values.nodeSelector }}
+{{- if $selector }}
+      nodeSelector:
+{{ toYaml $selector | indent 8 }}
+{{- end }}
+{{- end }}

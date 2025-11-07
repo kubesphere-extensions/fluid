@@ -34,7 +34,11 @@ spec:
       tolerations:
 {{ toYaml .Values.runtime.goosefs.tolerations | indent 6 }}
       {{- end }}
-      #hostNetwork: true
+      {{- if .Values.csi.config.hostNetwork }}
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+      {{- end }}
+      {{- include "common.nodeSelectors" .}}
       containers:
       - image: {{ include "fluid.controlplane.imageTransform" (list .Values.runtime.goosefs.controller.imagePrefix .Values.runtime.goosefs.controller.imageName .Values.runtime.goosefs.controller.imageTag . ) }}
         imagePullPolicy: Always

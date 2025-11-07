@@ -24,6 +24,7 @@ spec:
 {{ toYaml .Values.csi.tolerations | indent 6 }}
       {{- end }}
       #priorityClassName: system-node-critical
+      {{- include "common.nodeSelectors" .}}
       {{- if .Values.csi.config.hostNetwork }}
       hostNetwork: true
       dnsPolicy: ClusterFirstWithHostNet

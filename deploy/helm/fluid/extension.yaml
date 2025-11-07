@@ -34,10 +34,10 @@ screenshots:
 dependencies:
   - name: frontend
     tags:
-      - extension
+    - extension
   - name: fluid
     tags:
-      - agent
+    - agent
 # installationMode describes how to install subcharts, it can be HostOnly or Multicluster.
 # In Multicluster mode, the subchart with tag `extension` will only be deployed to the host cluster,
 # and the subchart with tag `agent` will be deployed to all selected clusters.
@@ -62,9 +62,31 @@ installationMode: Multicluster
 #  executor-hook-image.kubesphere.io/upgrade: ...
 #  executor-hook-image.kubesphere.io/uninstall: ...
 images:
-  - docker.io/fluidcloudnative/application-controller:v1.0.5-7e917c7
   - docker.io/fluidcloudnative/csi-node-driver-registrar:v2.3.0
-  - docker.io/fluidcloudnative/dataset-controller:v1.0.5-7e917c7
-  - docker.io/fluidcloudnative/fluid-crd-upgrader:v1.0.5-7e917c7
   - docker.io/fluidcloudnative/fluid-csi:v1.0.5-7e917c7
+  - docker.io/fluidcloudnative/fluid-crd-upgrader:v1.0.5-7e917c7
+  - docker.io/fluidcloudnative/alluxioruntime-controller:v1.0.5-7e917c7
+  - docker.io/fluidcloudnative/dataset-controller:v1.0.5-7e917c7
+  - docker.io/fluidcloudnative/efcruntime-controller:v1.0.5-7e917c7
+  - docker.io/fluidcloudnative/application-controller:v1.0.5-7e917c7
+  - docker.io/fluidcloudnative/goosefsruntime-controller:v1.0.5-7e917c7
+  - docker.io/fluidcloudnative/jindoruntime-controller:v1.0.5-7e917c7
+  - docker.io/fluidcloudnative/juicefsruntime-controller:v1.0.5-7e917c7
+  - docker.io/fluidcloudnative/thinruntime-controller:v1.0.5-7e917c7
+  - docker.io/fluidcloudnative/vineyardruntime-controller:v1.0.5-7e917c7
   - docker.io/fluidcloudnative/fluid-webhook:v1.0.5-7e917c7
+  - docker.io/fluidcloudnative/fluid-crd-upgrader:v1.0.5-7e917c7
+  - docker.io/fluidcloudnative/init-users:v0.9.0
+  - docker.io/juicedata/mount:ce-v1.2.0
+  - docker.io/juicedata/mount:ee-5.0.21-317356c
+  - docker.io/alluxio/alluxio-dev:2.9.0
+  - registry.cn-shanghai.aliyuncs.com/jindofs/smartdata:6.2.0
+  - registry.cn-shanghai.aliyuncs.com/jindofs/jindo-fuse:6.2.0
+  - registry.cn-zhangjiakou.aliyuncs.com/nascache/init-alifuse:v1.2.2-19dcee9
+  - registry.cn-zhangjiakou.aliyuncs.com/nascache/efc-master:v1.2.2-19dcee9
+  - registry.cn-zhangjiakou.aliyuncs.com/nascache/efc-worker:v1.2.2-19dcee9
+  - registry.cn-zhangjiakou.aliyuncs.com/nascache/efc-fuse:v1.2.2-19dcee9
+  - registry.aliyuncs.com/vineyard/vineyardd:v0.22.2
+  - registry.aliyuncs.com/vineyard/vineyard-fluid-fuse:v0.22.2
+  - ccr.ccs.tencentyun.com/qcloud/goosefs:v1.2.0
+  - ccr.ccs.tencentyun.com/qcloud/goosefs-fuse:v1.2.0

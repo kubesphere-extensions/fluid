@@ -34,7 +34,11 @@ spec:
       tolerations:
 {{ toYaml .Values.runtime.alluxio.tolerations | indent 6}}
       {{- end }}
-      #hostNetwork: true
+      {{- if .Values.csi.config.hostNetwork }}
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+      {{- end }}
+      {{- include "common.nodeSelectors" .}}
       containers:
       - image: {{ include "fluid.controlplane.imageTransform" (list .Values.runtime.alluxio.controller.imagePrefix .Values.runtime.alluxio.controller.imageName .Values.runtime.alluxio.controller.imageTag . ) }}
         name: manager

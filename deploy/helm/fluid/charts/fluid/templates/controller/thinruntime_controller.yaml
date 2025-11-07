@@ -34,7 +34,11 @@ spec:
       tolerations:
 {{ toYaml .Values.runtime.thin.tolerations | indent 6 }}
       {{- end }}
-      #hostNetwork: true
+      {{- if .Values.csi.config.hostNetwork }}
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+      {{- end }}
+      {{- include "common.nodeSelectors" .}}
       containers:
       - image: {{ include "fluid.controlplane.imageTransform" (list .Values.runtime.thin.controller.imagePrefix .Values.runtime.thin.controller.imageName .Values.runtime.thin.controller.imageTag . ) }}
         name: manager

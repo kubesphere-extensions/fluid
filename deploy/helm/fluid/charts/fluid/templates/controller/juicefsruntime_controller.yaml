@@ -35,10 +35,6 @@ spec:
 {{ toYaml .Values.runtime.juicefs.tolerations | indent 6 }}
       {{- end }}
       #hostNetwork: true
-      {{- if .Values.csi.config.hostNetwork }}
-      hostNetwork: true
-      dnsPolicy: ClusterFirstWithHostNet
-      {{- end }}
       {{- include "common.nodeSelectors" .}}
       containers:
       - image: {{ include "fluid.controlplane.imageTransform" (list .Values.runtime.juicefs.controller.imagePrefix .Values.runtime.juicefs.controller.imageName .Values.runtime.juicefs.controller.imageTag . ) }}

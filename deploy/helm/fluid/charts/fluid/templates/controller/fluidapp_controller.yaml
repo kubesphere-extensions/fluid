@@ -30,7 +30,7 @@ spec:
       tolerations:
 {{ toYaml .Values.fluidapp.tolerations | indent 6 }}
       {{- end }}
-      #hostNetwork: true
+      {{- include "common.nodeSelectors" .}}
       containers:
       - image: {{ include "fluid.controlplane.imageTransform" (list .Values.fluidapp.controller.imagePrefix .Values.fluidapp.controller.imageName .Values.fluidapp.controller.imageTag . ) }}
         name: manager

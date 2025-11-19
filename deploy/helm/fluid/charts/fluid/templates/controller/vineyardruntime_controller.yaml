@@ -34,6 +34,7 @@ spec:
       tolerations:
 {{ toYaml .Values.runtime.vineyard.tolerations | indent 6 }}
       {{- end }}
+      {{- include "common.nodeSelectors" .}}
       containers:
       - image: {{ include "fluid.controlplane.imageTransform" (list .Values.runtime.vineyard.controller.imagePrefix .Values.runtime.vineyard.controller.imageName .Values.runtime.vineyard.controller.imageTag . ) }}
         name: manager

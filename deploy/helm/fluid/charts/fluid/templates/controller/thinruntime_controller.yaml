@@ -34,7 +34,7 @@ spec:
       tolerations:
 {{ toYaml .Values.runtime.thin.tolerations | indent 6 }}
       {{- end }}
-      #hostNetwork: true
+      {{- include "common.nodeSelectors" .}}
       containers:
       - image: {{ include "fluid.controlplane.imageTransform" (list .Values.runtime.thin.controller.imagePrefix .Values.runtime.thin.controller.imageName .Values.runtime.thin.controller.imageTag . ) }}
         name: manager

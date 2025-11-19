@@ -32,7 +32,7 @@ spec:
       tolerations:
 {{ toYaml .Values.dataset.tolerations | indent 6}}
       {{- end }}
-      #hostNetwork: true
+      {{- include "common.nodeSelectors" .}}
       containers:
       - image: {{ include "fluid.controlplane.imageTransform" (list .Values.dataset.controller.imagePrefix .Values.dataset.controller.imageName .Values.dataset.controller.imageTag . ) }}
         name: manager

@@ -34,7 +34,7 @@ spec:
       tolerations:
 {{ toYaml .Values.runtime.efc.tolerations | indent 6 }}
       {{- end }}
-      #hostNetwork: true
+      {{- include "common.nodeSelectors" .}}
       containers:
       - image: {{ include "fluid.controlplane.imageTransform" (list .Values.runtime.efc.controller.imagePrefix .Values.runtime.efc.controller.imageName .Values.runtime.efc.controller.imageTag . ) }}
         imagePullPolicy: {{ .Values.runtime.efc.controller.imagePullPolicy }}

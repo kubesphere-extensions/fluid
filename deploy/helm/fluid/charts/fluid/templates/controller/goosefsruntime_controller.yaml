@@ -34,7 +34,7 @@ spec:
       tolerations:
 {{ toYaml .Values.runtime.goosefs.tolerations | indent 6 }}
       {{- end }}
-      #hostNetwork: true
+      {{- include "common.nodeSelectors" .}}
       containers:
       - image: {{ include "fluid.controlplane.imageTransform" (list .Values.runtime.goosefs.controller.imagePrefix .Values.runtime.goosefs.controller.imageName .Values.runtime.goosefs.controller.imageTag . ) }}
         imagePullPolicy: Always

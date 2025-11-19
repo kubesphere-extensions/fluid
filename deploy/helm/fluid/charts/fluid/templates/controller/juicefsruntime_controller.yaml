@@ -35,6 +35,7 @@ spec:
 {{ toYaml .Values.runtime.juicefs.tolerations | indent 6 }}
       {{- end }}
       #hostNetwork: true
+      {{- include "common.nodeSelectors" .}}
       containers:
       - image: {{ include "fluid.controlplane.imageTransform" (list .Values.runtime.juicefs.controller.imagePrefix .Values.runtime.juicefs.controller.imageName .Values.runtime.juicefs.controller.imageTag . ) }}
         name: manager
